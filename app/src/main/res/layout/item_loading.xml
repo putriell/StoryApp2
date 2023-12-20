@@ -3,13 +3,11 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="8dp"
-    tools:ignore="MissingDefaultResource">
+    android:padding="8dp">
 
     <TextView
-        android:id="@+id/message_error"
+        android:id="@+id/error"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -17,21 +15,17 @@
         android:textColor="?android:textColorPrimary"
         tools:text="Timeout" />
 
-    <com.google.android.material.progressindicator.CircularProgressIndicator
-        android:id="@+id/progressBarr"
-        android:layout_width="wrap_content"
-        android:indeterminate="true"
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center" />
 
     <Button
-        android:id="@+id/retry_button"
+        android:id="@+id/retry"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="@style/Widget.Material3.Button"
-        android:textAppearance="@style/TextAppearance.Material3.LabelLarge"
-        app:icon="@drawable/ic_refresh"
-        app:iconGravity="textStart"
         android:layout_gravity="center"
-        android:text="Retry" />
+        android:text="tryAgain" />
 </LinearLayout>

@@ -39,8 +39,10 @@ class Repository private constructor(private val preference: UserPreference, pri
         token: String,
         imageMultipart: MultipartBody.Part,
         description: RequestBody,
+        lat: Double? = null,
+        lon: Double? = null
     ) =
-        apiService.addStory(token, imageMultipart, description)
+        apiService.addStory(token, imageMultipart, description, lat, lon)
 
 
     fun getSession() = preference.getSesion().asLiveData()
@@ -48,6 +50,9 @@ class Repository private constructor(private val preference: UserPreference, pri
     suspend fun setAuth(user: UserModel) = preference.setAuth(user)
 
     suspend fun logout() = preference.logout()
+
+    suspend fun getLocation(token: String) = apiService.getLocation(token)
+
 
     companion object {
         @Volatile

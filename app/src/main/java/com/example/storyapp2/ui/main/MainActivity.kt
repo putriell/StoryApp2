@@ -3,7 +3,6 @@ package com.example.storyapp2.ui.main
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +13,8 @@ import com.example.storyapp2.databinding.ActivityMainBinding
 import com.example.storyapp2.ui.adapter.StoryAdapter
 import com.example.storyapp2.ui.addStory.AddStoryActivity
 import com.example.storyapp2.ui.welcome.WelcomeActivity
+import com.example.storyapp2.ui.Maps.MapsActivity
+import com.example.storyapp2.ui.adapter.LoadingStateAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -48,7 +49,11 @@ class MainActivity : AppCompatActivity() {
                 finish()
             }
             storyAdapter = StoryAdapter()
-            binding.recyclerview.adapter = storyAdapter
+            binding.recyclerview.adapter = storyAdapter.withLoadStateFooter(
+                footer = LoadingStateAdapter{
+                    storyAdapter.retry()
+                }
+            )
             mainViewModel.listStory(token).observe(this) {
                 storyAdapter.submitData(lifecycle, it)
             }
@@ -96,9 +101,16 @@ class MainActivity : AppCompatActivity() {
                 }
                 true
             }
+            R.id.action_location -> {
+                val intent = Intent(this@MainActivity, MapsActivity::class.java)
+                startActivity(intent)
+                true
+
+            }
             else -> false
         }
         }
+
     }
 
 }

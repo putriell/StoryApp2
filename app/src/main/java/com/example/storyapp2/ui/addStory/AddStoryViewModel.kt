@@ -28,12 +28,14 @@ class AddStoryViewModel (private val repository: Repository) : ViewModel() {
     fun addNewStory(
         token: String,
         imageMultipart: MultipartBody.Part,
-        description: RequestBody
+        description: RequestBody,
+        lat: Double? = null,
+        lon: Double? = null
     ) {
         _isLoading.value = true
         viewModelScope.launch {
             try {
-                val apiResponse = repository.addNewStory(token, imageMultipart, description)
+                val apiResponse = repository.addNewStory(token, imageMultipart, description, lat, lon)
                 _errorResponse.postValue(apiResponse)
                 Log.d(TAG, "onSuccess: ${apiResponse.message}")
                 _isLoading.value = false

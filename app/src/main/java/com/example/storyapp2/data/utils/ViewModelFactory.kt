@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.storyapp2.data.di.Injection
 import com.example.storyapp2.data.repository.Repository
+import com.example.storyapp2.ui.Maps.MapsViewModel
 import com.example.storyapp2.ui.addStory.AddStoryViewModel
 import com.example.storyapp2.ui.login.LoginViewModel
 import com.example.storyapp2.ui.main.MainViewModel
@@ -28,7 +29,9 @@ ViewModelProvider.NewInstanceFactory() {
             modelClass.isAssignableFrom(AddStoryViewModel::class.java) -> {
                 AddStoryViewModel(this.repository) as T
             }
-
+            modelClass.isAssignableFrom(MapsViewModel::class.java) -> {
+                MapsViewModel(this.repository) as T
+            }
             else -> {
                 throw IllegalArgumentException("ViewModel Not Found: ${modelClass.name}")
             }

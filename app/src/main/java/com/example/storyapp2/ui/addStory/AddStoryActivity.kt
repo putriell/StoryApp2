@@ -4,14 +4,15 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.BitmapFactory
+import android.location.Location
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
+import com.google.android.gms.location.FusedLocationProviderClient
+import com.google.android.gms.location.LocationServices
 import android.view.View
 import android.widget.Toast
-import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.core.app.ActivityCompat
@@ -20,14 +21,12 @@ import androidx.core.content.FileProvider
 import com.example.storyapp2.R
 import com.example.storyapp2.databinding.ActivityAddStoryBinding
 import com.example.storyapp2.ui.main.MainActivity
-import com.example.storyapp2.data.Result
 import com.example.storyapp2.data.utils.*
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.MultipartBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.File
-import java.io.IOException
 
 class AddStoryActivity : AppCompatActivity() {
 
@@ -36,6 +35,10 @@ class AddStoryActivity : AppCompatActivity() {
         ViewModelFactory.getInstance(this)
     }
     private var getFile: File? = null
+    private var lat: Double? = null
+    private var lon: Double? = null
+
+    private lateinit var fusedLocationClient: FusedLocationProviderClient
 
     override fun onRequestPermissionsResult(
         requestCode: Int,
@@ -91,6 +94,7 @@ class AddStoryActivity : AppCompatActivity() {
         binding = ActivityAddStoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
 
         if (!allPermissionsGranted()) {
             ActivityCompat.requestPermissions(
@@ -128,7 +132,22 @@ class AddStoryActivity : AppCompatActivity() {
             btnCamera.setOnClickListener { startCamera() }
             btnGallery.setOnClickListener { startGallery() }
             btnUpload.setOnClickListener { uploadImage() }
+            location.setOnCheckedChangeListener{ _, checked ->
+                if (checked) {
+                    getMyLocation()
+                } else {
+                    lat = null
+                    lon = null
+                }
+            }
         }
+    }
+
+
+    private fun chekPermission(permision : String) : Boolean {
+        return ContextCompat.checkSelfPermission(
+            this, permision
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
     private fun startCamera() {
@@ -171,7 +190,7 @@ class AddStoryActivity : AppCompatActivity() {
                 requestImage
             )
             viewModel.getUser().observe(this) { user ->
-                viewModel.addNewStory("Bearer ${user.token}", imageMultipart, description)
+                viewModel.addNewStory("Bearer ${user.token}", imageMultipart, description,  lat, lon)
             }
         } else {
             Toast.makeText(this, resources.getString(R.string.file_empty), Toast.LENGTH_SHORT)
@@ -190,6 +209,56 @@ class AddStoryActivity : AppCompatActivity() {
             binding.progressBarr.visibility = View.GONE
         }
     }
+
+    private fun getMyLocation() {
+        if (chekPermission(
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) && chekPermission(Manifest.permission.ACCESS_COARSE_LOCATION)
+        ) {
+            if (ActivityCompat.checkSelfPermission(this,
+                    Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(
+                    this,
+                    Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED
+            ) {
+                return
+            }
+            fusedLocationClient.lastLocation.addOnSuccessListener { location: Location? ->
+                if (location !=null){
+                    lon = location.longitude
+                    lat = location.latitude
+                } else{
+                    Toast.makeText(this@AddStoryActivity, "Location is not found. Try again", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+        else {
+            permissionLauncher.launch(
+                arrayOf(
+                    Manifest.permission.ACCESS_FINE_LOCATION,
+                    Manifest.permission.ACCESS_COARSE_LOCATION
+                )
+            )
+        }
+    }
+
+    private val permissionLauncher =
+        registerForActivityResult(
+            ActivityResultContracts.RequestMultiplePermissions()
+        ) { permissions ->
+            when {
+                permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false -> {
+                    getMyLocation()
+                }
+
+                permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false -> {
+                    getMyLocation()
+                }
+
+                else -> {
+                    binding.location.isChecked = false
+                }
+            }
+        }
 
 
 

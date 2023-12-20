@@ -13,16 +13,17 @@
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/drawable/ic_logout.xml" value="0.1" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/drawable/ic_refresh.xml" value="0.1" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/drawable/ic_switch_camera.xml" value="0.1" />
-        <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_add_story.xml" value="0.1" />
+        <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_add_story.xml" value="0.152" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_camera.xml" value="0.136" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_detail.xml" value="0.11666666666666667" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_login.xml" value="0.264" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_main.xml" value="0.1" />
+        <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_maps.xml" value="0.1" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_register.xml" value="0.11666666666666667" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/activity_welcome.xml" value="0.11666666666666667" />
-        <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/item_loading.xml" value="0.1" />
+        <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/item_loading.xml" value="0.264" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/layout/list_story.xml" value="0.11666666666666667" />
-        <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/menu/menu.xml" value="0.176" />
+        <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/menu/menu.xml" value="0.1" />
         <entry key="..\:/kuliah/Bangkit/StoryApp2/app/src/main/res/xml/file_path.xml" value="0.20555555555555555" />
       </map>
     </option>
