@@ -1,0 +1,36 @@
+<resources>
+    <string name="app_name">StoryApp2</string>
+    <string name="tittle_welcome">Selamat datang di Dicoding Story!</string>
+    <string name="description_welcome">Berbagi experience, bertanya, maupun diskusi tentang dunia IT? di dicoding story aja!</string>
+    <string name="title_login">Sudah siap menjelajahi dunia IT?</string>
+    <string name="description_login">masuk untuk explore lebih banyak lagi!</string>
+    <string name="username">username</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="login">login</string>
+    <string name="title_register">Lengkapi data dirimu untuk mendapatkan akun</string>
+    <string name="akun">akun</string>
+    <string name="register">register</string>
+    <string name="success_login">Berhasil membuat akun!</string>
+    <string name="name">nama</string>
+    <string name="description">deskripsi</string>
+    <string name="input_desc">masukkan deskripsi</string>
+    <string name="camera">kamera</string>
+    <string name="gallery">galeri</string>
+    <string name="upload">unggah</string>
+    <string name="btn_capture">capture</string>
+    <string name="btn_swicth_camera">Switch Camera</string>
+    <string name="request_denied">request denied</string>
+    <string name="file_empty">file empty</string>
+    <string name="email_empty">email empty</string>
+    <string name="password_empty">password empty</string>
+    <string name="name_empty">name empty</string>
+    <string name="logout">logout</string>
+    <string name="upload_message">Upload Success</string>
+    <string name="dialog_positive_button">next</string>
+    <string name="warning">No image selected</string>
+    <string name="logout_dialog">logout</string>
+    <string name="logout_message">are you sure want to logout?</string>
+    <string name="yes">yes</string>
+    <string name="no">no</string>
+</resources>
