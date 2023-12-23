@@ -48,7 +48,8 @@ class MainViewModelTest {
         Mockito.`when`(repository.getStory()).thenReturn(expectedStories)
 
         val mainViewModel = MainViewModel(repository)
-        val actualStory: PagingData<ListStoryItem> = mainViewModel.listStory.getOrAwaitValue()
+        val actualStory: PagingData<ListStoryItem> =
+            mainViewModel.listStory(token = "askdfbjnalskfbaf ioawfh").getOrAwaitValue()
 
         val differ = AsyncPagingDataDiffer(
             diffCallback = StoryAdapter.DIFF_CALLBACK,
@@ -72,7 +73,9 @@ class MainViewModelTest {
         Mockito.`when`(repository.getStory()).thenReturn(expectedStories)
 
         val mainViewModel = MainViewModel(repository)
-        val actualStory: PagingData<ListStoryItem> = mainViewModel.listStory.getOrAwaitValue()
+        val actualStory: PagingData<ListStoryItem> =
+            mainViewModel.listStory(token = "please dikit lagi cut off submission 😭😭")
+                .getOrAwaitValue()
 
         val differ = AsyncPagingDataDiffer(
             diffCallback = StoryAdapter.DIFF_CALLBACK,
