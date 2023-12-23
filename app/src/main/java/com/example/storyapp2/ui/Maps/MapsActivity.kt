@@ -4,6 +4,7 @@ import android.content.res.Resources
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.gms.maps.CameraUpdateFactory
@@ -49,24 +50,17 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         mMap.uiSettings.isZoomControlsEnabled = true
         mMap.uiSettings.isMapToolbarEnabled = true
 
-        val token = intent.getStringExtra(EXTRA_TOKEN)
+        val unitToString: Unit = getUserToken()
 
-//        val dicodingSpace = LatLng(-6.8957643, 107.6338462)
-//        mMap.addMarker(
-//            MarkerOptions()
-//                .position(dicodingSpace)
-//                .title("Dicoding Space")
-//                .snippet("Batik Kumeli No.50")
-//        )
-//        mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(dicodingSpace, 15f))
-//
+        val resultUnitToString: String = unitToString.toString()
+
+        Log.e("Token ane", "token : $resultUnitToString")
 
         viewModel.isLoading.observe(this) {
             showLoading(it)
         }
 
-        viewModel.getLocation("Bearer $token")
-
+        getUserToken()
         setMapStyle()
         addManyMarker()
     }
@@ -125,6 +119,18 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
             }
         } catch (exception: Resources.NotFoundException) {
             Log.e(TAG, "Can't find style. Error: ", exception)
+        }
+    }
+
+    private fun getUserToken(): Unit {
+        viewModel.getUser().observe(this) {
+
+            val token = it.token
+            Toast.makeText(this@MapsActivity, "Token $token", Toast.LENGTH_SHORT).show()
+            Log.d("My Token", "Token Gw : $token")
+
+            viewModel.getLocation("Bearer $token")
+
         }
     }
 

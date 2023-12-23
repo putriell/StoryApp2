@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.storyapp2.data.pref.UserModel
 import com.example.storyapp2.data.repository.Repository
 import com.example.storyapp2.data.response.StoryResponse
 import com.google.gson.Gson
@@ -20,6 +21,10 @@ class MapsViewModel(private val repository: Repository) : ViewModel() {
 
     private val _mapsResponse = MutableLiveData<StoryResponse>()
     val mapsResponse: LiveData<StoryResponse> = _mapsResponse
+
+    fun getUser(): LiveData<UserModel>{
+        return repository.getSession()
+    }
 
     fun getLocation(token: String){
         _isLoading.postValue(true)
