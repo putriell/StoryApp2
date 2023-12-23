@@ -17,6 +17,10 @@ class MainViewModel(private val repository: Repository)  : ViewModel() {
         return repository.getStory().cachedIn(viewModelScope)
     }
 
+    val listStory: LiveData<PagingData<ListStoryItem>> =
+        repository.getStory().cachedIn(viewModelScope)
+
+
     fun getUser(): LiveData<UserModel>{
         return repository.getSession()
     }
